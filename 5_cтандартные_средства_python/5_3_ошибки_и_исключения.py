@@ -1,0 +1,37 @@
+"""
+Задача:
+Реализуйте класс PositiveList, наследовав его от класса list, для хранения положительных
+целых чисел. Также реализуйте новое исключение NonPositiveError.
+
+В классе PositiveList переопределите метод append(self, x) таким образом, чтобы при
+попытке добавить отрицательное целое число бросалось исключение NonPositiveError и
+число не добавлялось, а при попытке добавить положительное целое число, число
+добавлялось бы как в стандартный list.
+
+В данной задаче гарантируется, что в качестве аргумента x метода append всегда будет
+передаваться целое число.
+
+Примечание: Положительными считаются числа, строго больше нуля.
+"""
+
+class NonPositiveError(Exception):
+    pass
+
+
+class PositiveList(list):
+
+    def append(self, x):
+        if x > 0:
+            super(PositiveList, self).append(x)
+        if x <= 0:
+            raise NonPositiveError()
+
+
+# Проверка
+a = PositiveList()
+a.append(5)
+print(a)
+a.append(10)
+print(a)
+a.append(-6)
+print(a)
